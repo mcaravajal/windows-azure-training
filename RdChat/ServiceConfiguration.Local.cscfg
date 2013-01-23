@@ -5,13 +5,15 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="DataConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="ContainerName" value="gallery" />
+      <Setting name="ContainerName" value="public" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </Role>
   <Role name="WorkerRole1">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=chatraining;AccountKey=FAhIVZ5sTnZubHwhdd7C9+Na3216CriPd28OEz9Qrk8QK4Y8fGpxETX8Sv/yr7xGjAJJLiv74ENMoot+ho86UQ==" />
       <Setting name="DataConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>

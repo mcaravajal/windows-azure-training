@@ -18,6 +18,8 @@
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
+    <Certificates>
+    </Certificates>
   </WebRole>
   <WorkerRole name="WorkerRole1" vmsize="Small">
     <Imports>

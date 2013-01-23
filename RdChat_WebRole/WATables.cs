@@ -11,10 +11,18 @@ namespace RdChat_WebRole
 {
     public static class WATables
     {
+
+
+        public static MessageDataServiceContext _instance= null;
+
         public static MessageDataServiceContext Getcontainer()
         {
-            var account = CloudStorageAccount.FromConfigurationSetting("DataConnectionString");
-            return new MessageDataServiceContext(account.TableEndpoint.ToString(), account.Credentials);
+            if (_instance == null)
+            {
+                var account = CloudStorageAccount.FromConfigurationSetting("DataConnectionString");
+                _instance = new MessageDataServiceContext(account.TableEndpoint.ToString(), account.Credentials);
+            }
+            return _instance;
         }
         public static DataTable GetTable()
         {            
@@ -60,7 +68,7 @@ namespace RdChat_WebRole
             {
                 tempo = time.Days + " days and " + time.Hours + " hours ago";
             }
-            else if (time.Hours >= 0)
+            else if (time.Hours >= 1)
             {
                 tempo = time.Hours + " hours and " + time.Minutes + " minutes ago";
             }
@@ -93,7 +101,18 @@ namespace RdChat_WebRole
             //Upluad the entity edited
             Getcontainer().UpdateObject(entity);
             //Save the changes
-            Getcontainer().SaveChangesWithRetries();
+            Getcontainer().SaveChanges();
+        }
+        public static Message GetRowByRowkey(string rowkey)
+        {
+            Message entity =
+                (from i in Getcontainer().CreateQuery<Message>("Messages")
+                 where i.RowKey == rowkey
+                 select i).FirstOrDefault();
+            if (entity == null)
+                throw new Exception("No se encontro el mensaje seleccionado");
+            else
+                return entity;
         }
     }
 }

@@ -30,7 +30,7 @@
     <Property name="Configuration" value="Debug" />
     <Property name="Platform" value="AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.0" />
-    <Property name="OutputDir" value="C:\Users\mcaravajal\Desktop\WATK\Ex1-WorkingWithTables\Begin\RdChat\obj\Debug\WorkerRole1\" />
+    <Property name="OutputDir" value="C:\windows-azure-training\RdChat\obj\Debug\WorkerRole1\" />
     <Property name="EntryPoint" value="WorkerRole1.dll" />
     <Property name="SourceDir" value="" />
     <Property name="SitePhysicalPath" value="" />

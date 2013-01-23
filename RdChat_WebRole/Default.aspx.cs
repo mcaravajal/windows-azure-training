@@ -46,20 +46,23 @@ namespace RdChat_WebRole
                 this.messageList.DataBind();
                 this.status.Visible = false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.status.Visible = true;
-                this.status.Text=ex.Message;
+                this.status.Text = ex.Message;
             }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            checking = new Mydelegate(Check);
-            checking.BeginInvoke(null, null);
+            if (!Page.IsPostBack)
+            {
+                checking = new Mydelegate(Check);
+                checking.BeginInvoke(null, null);
+            }
             //System.Threading.Thread newthread = new System.Threading.Thread(Check);
             //newthread.Start();
             //WABlobs.SetAvatarByDefault("http://127.0.0.1:10000/devstoreaccount1/gallery/Avatar");
-            refresh();            
+            refresh();
         }
 
         /// <summary>
@@ -75,8 +78,10 @@ namespace RdChat_WebRole
             try
             {
                 
-                WATables.NewRow(HttpUtility.HtmlEncode(this.nameBox.Text), HttpUtility.HtmlEncode(this.messageBox.Text),this.FileUpload1);
-                refresh();
+                    WATables.NewRow(HttpUtility.HtmlEncode(this.nameBox.Text), HttpUtility.HtmlEncode(this.messageBox.Text), this.FileUpload1);
+                    refresh();
+             //           WATables.EditRow(Rowkey.Text, nameBox.Text, messageBox.Text);
+             //           refresh();
             }
             catch (DataServiceRequestException ex)
             {
@@ -89,15 +94,17 @@ namespace RdChat_WebRole
         protected void Timer1_Tick1(object sender, EventArgs e)
         {
             //Check();
-        }       
-        
+        }
+
         protected void OnEdit_link(object sender, CommandEventArgs e)
         {
             try
             {
-                Rowkey.Text = e.CommandArgument.ToString();
-                WATables.EditRow(Rowkey.Text, nameBox.Text, messageBox.Text);
-                refresh();
+                Message entity_toEdit = WATables.GetRowByRowkey(e.CommandArgument.ToString());
+                this.Rowkey.Text = entity_toEdit.RowKey;
+                this.nameBox.Text = entity_toEdit.Name;
+                this.messageBox.Text = entity_toEdit.Body;
+                this.submitButton.CommandName = "Edit";
             }
             catch (Exception ex)
             {
@@ -109,14 +116,14 @@ namespace RdChat_WebRole
         {
             try
             {
-                    WorkerRole work = new WorkerRole();
-                    if (work.check())
-                    {
-                        refresh();
-                        Timer1_Tick1(null,null);
-                    }
+                WorkerRole work = new WorkerRole();
+                if (work.check())
+                {
+                    refresh();
+                    Timer1_Tick1(null, null);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 status.Visible = true;
                 status.Text = ex.Message;

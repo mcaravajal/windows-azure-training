@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="RdChat" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" schemaVersion="2012-05.1.7">
+  <Role name="RdChat_WebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=http;AccountName=chatraining;AccountKey=FAhIVZ5sTnZubHwhdd7C9+Na3216CriPd28OEz9Qrk8QK4Y8fGpxETX8Sv/yr7xGjAJJLiv74ENMoot+ho86UQ==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=http;AccountName=chatraining;AccountKey=FAhIVZ5sTnZubHwhdd7C9+Na3216CriPd28OEz9Qrk8QK4Y8fGpxETX8Sv/yr7xGjAJJLiv74ENMoot+ho86UQ==" />
+      <Setting name="ContainerName" value="public" />
+    </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
+  </Role>
+  <Role name="WorkerRole1">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=http;AccountName=chatraining;AccountKey=FAhIVZ5sTnZubHwhdd7C9+Na3216CriPd28OEz9Qrk8QK4Y8fGpxETX8Sv/yr7xGjAJJLiv74ENMoot+ho86UQ==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=http;AccountName=chatraining;AccountKey=FAhIVZ5sTnZubHwhdd7C9+Na3216CriPd28OEz9Qrk8QK4Y8fGpxETX8Sv/yr7xGjAJJLiv74ENMoot+ho86UQ==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

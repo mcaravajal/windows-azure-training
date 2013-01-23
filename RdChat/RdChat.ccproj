@@ -33,8 +33,9 @@
   </PropertyGroup>
   <!-- Items for the project -->
   <ItemGroup>
+    <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
     <ServiceDefinition Include="ServiceDefinition.csdef" />
-    <ServiceConfiguration Include="ServiceConfiguration.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RdChat_WebRole\RdChat_WebRole.csproj">
@@ -52,6 +53,12 @@
       <RoleName>WorkerRole1</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Profiles" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\chatrainingStaging.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RdChat" generation="1" functional="0" release="0" Id="f8cd1ede-5fa0-4596-8618-50ebbe8de5aa" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RdChat" generation="1" functional="0" release="0" Id="1bab1fc6-4529-4de8-aa79-7435b6132863" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="RdChatGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -92,7 +92,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="RdChat_WebRole" generation="1" functional="0" release="0" software="C:\Users\mcaravajal\Desktop\WATK\Ex1-WorkingWithTables\Begin\RdChat\csx\Debug\roles\RdChat_WebRole" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+          <role name="RdChat_WebRole" generation="1" functional="0" release="0" software="C:\windows-azure-training\RdChat\csx\Debug\roles\RdChat_WebRole" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="HttpIn" protocol="http" portRanges="80" />
             </componentports>
@@ -113,7 +113,7 @@
           </sCSPolicy>
         </groupHascomponents>
         <groupHascomponents>
-          <role name="WorkerRole1" generation="1" functional="0" release="0" software="C:\Users\mcaravajal\Desktop\WATK\Ex1-WorkingWithTables\Begin\RdChat\csx\Debug\roles\WorkerRole1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="WorkerRole1" generation="1" functional="0" release="0" software="C:\windows-azure-training\RdChat\csx\Debug\roles\WorkerRole1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <settings>
               <aCS name="DataConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="" />
@@ -139,9 +139,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="eb5b69b3-f904-4cf9-b3f4-3758e2e8981f" ref="Microsoft.RedDog.Contract\ServiceContract\RdChatContract@ServiceDefinition.build">
+    <implementation Id="e33b6fcb-f5f9-4494-9a83-e2ac66242a6e" ref="Microsoft.RedDog.Contract\ServiceContract\RdChatContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="e73c460d-2169-465b-a152-ec60754773f2" ref="Microsoft.RedDog.Contract\Interface\RdChat_WebRole:HttpIn@ServiceDefinition.build">
+        <interfaceReference Id="defae811-7aed-4613-935d-d9241ebf2b8e" ref="Microsoft.RedDog.Contract\Interface\RdChat_WebRole:HttpIn@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/RdChat/RdChatGroup/RdChat_WebRole:HttpIn" />
           </inPort>
