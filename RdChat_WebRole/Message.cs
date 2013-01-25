@@ -14,7 +14,7 @@ namespace RdChat_WebRole
         public string avatar { get; set; }
         public Message()
         {
-            PartitionKey = "a";
+            PartitionKey = "Message";
             RowKey = string.Format("{0:10}_{1}", DateTime.MaxValue.Ticks - DateTime.Now.Ticks, Guid.NewGuid());
         }
 

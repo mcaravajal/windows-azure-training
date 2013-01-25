@@ -7,10 +7,10 @@ using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using System.Collections.Specialized;
 using System.Data.Services.Client;
-using Microsoft.WindowsAzure.StorageClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Drawing.Imaging;
 
 namespace RdChat_WebRole
 {
@@ -21,11 +21,14 @@ namespace RdChat_WebRole
 
             var account = CloudStorageAccount.FromConfigurationSetting("DataConnectionString");
             CloudBlobClient client = account.CreateCloudBlobClient();
+            BlobContainerPermissions permission = new Microsoft.WindowsAzure.StorageClient.BlobContainerPermissions();
+            permission.PublicAccess = BlobContainerPublicAccessType.Container;
             CloudBlobContainer container= client.GetContainerReference(RoleEnvironment.GetConfigurationSettingValue("ContainerName"));
             container.CreateIfNotExist();
+            container.SetPermissions(permission);
             return container;
         }
-        public static string UploadBlob(string path, string name, string contentType, byte[] data)
+        public static string UploadBlob(string path, string name, string contentType, Stream data)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -33,33 +36,48 @@ namespace RdChat_WebRole
             }
             else
             {
-                var blob = GetContainer().GetBlobReference(name);
+                string RowKey = Guid.NewGuid().ToString();
+                var blob = GetContainer().GetBlobReference(RowKey);
 
                 blob.Properties.ContentType = contentType;
 
                 // Create some metadata for this image
                 var metadata = new NameValueCollection();
-                string RowKey = Guid.NewGuid().ToString();
-                metadata["Id"] = RowKey;
                 metadata["Filename"] = Guid.NewGuid().ToString();
                 metadata["Autor"] = name;
-                metadata["ImageName"] = string.IsNullOrEmpty(path) ? "unknown" : RowKey;
+                metadata["ImageName"] = string.IsNullOrEmpty(path) ? "unknown" : path;
 
                 // Add and commit metadata to blob
-                //blob.Metadata.Add(metadata);
+                blob.Metadata.Add(metadata);
                 //blob.UploadByteArray(data);
-                MemoryStream ms = new MemoryStream(data);
-                Image img = Image.FromStream(ms);
-                Bitmap oldimage = new Bitmap(img);
-                Bitmap newImage = new Bitmap(50, 50);
-                Graphics gr = Graphics.FromImage(newImage);
-                gr.SmoothingMode = SmoothingMode.HighQuality;
-                gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                gr.DrawImage(oldimage, new Rectangle(0, 0, 50, 50));
+                /*Image img = Image.FromStream(data);
+                Bitmap b = new Bitmap(50, 50);
+                Graphics g = Graphics.FromImage((Image)b);
+                g.DrawImage(img, 0, 0, 50, 50);
+                g.Dispose();
+                Image thumbnail= img.GetThumbnailImage(50,50,null,IntPtr.Zero);
+                thumbnail.Save(data, ImageFormat.Jpeg);
+                blob.UploadFromStream(data);*/
+                Bitmap orig = new Bitmap(data);
 
-                return blob.Uri.ToString();
+                int width=50;
+                int height=50;
 
+                Bitmap thumb = new Bitmap(width, height);
+                using (Graphics graphic = Graphics.FromImage(thumb))
+                {
+                    graphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    graphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+                    graphic.DrawImage(orig, 0, 0, width, height);
+                    MemoryStream ms = new MemoryStream();
+                    thumb.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                    ms.Seek(0, SeekOrigin.Begin);
+                    blob.UploadFromStream(ms);
+                    return blob.Uri.ToString();
+                }
             }
         }
         public static string GetEditButton()

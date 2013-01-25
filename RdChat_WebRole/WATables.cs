@@ -80,7 +80,7 @@ namespace RdChat_WebRole
         }
         public static void NewRow(string name,string body,FileUpload file)
         {
-            string uri = WABlobs.UploadBlob(file.FileName, name, file.PostedFile.ContentType, file.FileBytes);
+            string uri = WABlobs.UploadBlob( file.FileName, name, file.PostedFile.ContentType, file.PostedFile.InputStream);
             //Add the row to the Table
             Getcontainer().AddMessage(name, body, DateTime.Now, uri);
             //Sending the query telling that the row was inserted

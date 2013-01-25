@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RdChat_WebRole.Azure" generation="1" functional="0" release="0" Id="2ef9da9a-8add-46e2-9f1b-bb927c620eb8" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RdChat_WebRole.Azure" generation="1" functional="0" release="0" Id="e142b77f-8236-447a-91f4-04c9c0761406" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="RdChat_WebRole.AzureGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -327,14 +327,14 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="39728a58-c510-42f9-881f-0e757b4c9d37" ref="Microsoft.RedDog.Contract\ServiceContract\RdChat_WebRole.AzureContract@ServiceDefinition">
+    <implementation Id="b98d0132-8b60-458e-a85e-cde125206076" ref="Microsoft.RedDog.Contract\ServiceContract\RdChat_WebRole.AzureContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="6138cd22-c802-418c-b92b-c313391dd4b1" ref="Microsoft.RedDog.Contract\Interface\RdChat_WebRole:HttpIn@ServiceDefinition">
+        <interfaceReference Id="1ce638e5-4a0f-4812-a077-227b8fa34ccb" ref="Microsoft.RedDog.Contract\Interface\RdChat_WebRole:HttpIn@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/RdChat_WebRole.Azure/RdChat_WebRole.AzureGroup/RdChat_WebRole:HttpIn" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="55974ba4-1eac-4ce9-b935-60e9b1c70dc5" ref="Microsoft.RedDog.Contract\Interface\WorkerRole1:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
+        <interfaceReference Id="45f415d0-3088-4da0-8e62-d4e62ed15d8d" ref="Microsoft.RedDog.Contract\Interface\WorkerRole1:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/RdChat_WebRole.Azure/RdChat_WebRole.AzureGroup/WorkerRole1:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>
